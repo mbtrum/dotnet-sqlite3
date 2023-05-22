@@ -15,12 +15,12 @@ namespace WebApplicationSqlite.Pages
 
         public void OnGet()
         {
-            using (var connection = new SqliteConnection(@"Data Source=database.db"))
+            using (var connection = new SqliteConnection("Data Source=database.db"))
             {
                 connection.Open();
 
                 var command = connection.CreateCommand();
-                command.CommandText = @"select name from person";
+                command.CommandText = "select name from person";
                 
                 //command.Parameters.AddWithValue("$id", id);
 
@@ -29,8 +29,8 @@ namespace WebApplicationSqlite.Pages
                     while (reader.Read())
                     {
                         var name = reader.GetString(0);
-
-                        Console.WriteLine($"Hello, {name}!");
+                        _logger.LogInformation($"Hello, {name}!");
+                        //Console.WriteLine($"Hello, {name}!");
                     }
                 }
             }
